@@ -7,9 +7,10 @@ export type User = {
 
 export type AuthContextType = {
     user: User | null
-    login: (email: string) => Promise<void>
+    login: (email: string, password: string) => Promise<void>
     register: (name: string, email: string, password: string) => Promise<void>
     logout: () => void
+    apiFetch?: (path: string, opts?: RequestInit) => Promise<Response>
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined)

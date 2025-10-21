@@ -1,22 +1,20 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Layout from '../layouts/Layout'
+import App from '../App'
 import Home from '../pages/Home'
-import Sobre from '../pages/Sobre'
-import Contato from '../pages/Contato/contato'
 import Login from '../pages/Auth/Login'
 import Register from '../pages/Auth/Register'
+import Tarefa from '../pages/Tarefa'
 
 export default function AppRoutes() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Layout />}>
+                <Route path="/" element={<App />}>
                     <Route index element={<Home />} />
-                    <Route path="sobre" element={<Sobre />} />
-                    <Route path="contato" element={<Contato />} />
                 </Route>
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="tarefa" element={<Tarefa />} />
             </Routes>
         </BrowserRouter>
     )

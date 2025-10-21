@@ -10,11 +10,17 @@ export default function Register() {
     const navigate = useNavigate()
 
     if (!auth) throw new Error('AuthContext not found')
+    const a = auth
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault()
-        await auth!.register(name, email, password)
-        navigate('/')
+        try {
+            await a.register(name, email, password)
+            navigate('/')
+        } catch (err: any) {
+            // show error briefly (could be improved)
+            alert(err?.message || 'Erro ao registrar')
+        }
     }
 
     return (
