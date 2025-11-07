@@ -12,8 +12,6 @@ export default function Login() {
     if (!auth) throw new Error('AuthContext not found')
     const a = auth
 
-    // We will redirect to /tarefa on success
-
     function validateEmail(email: string) {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
     }
@@ -41,7 +39,6 @@ export default function Login() {
 
     return (
         <div className="flex h-[400px] w-full overflow-hidden">
-
             <div className="dark:bg-neutral-900 md:w-[300px] flex-none w-[300px] h-full flex flex-col justify-center p-8 text-white rounded-md">
                 <div className="text-2xl text-left font-bold pb-8">Login</div>
                 <form onSubmit={handleSubmit} className="w-full max-w-[280px]">
@@ -82,14 +79,6 @@ export default function Login() {
 
                     <div className='w-60 text-xs mt-15 mb-5'>Não tem uma conta?  <a className='text-1xl' href="/register">Cadastre-se</a></div>
                 </form>
-            </div>
-
-            <div className="flex-1 h-full overflow-hidden rounded-md">
-                <img
-                    src="/img.jpg"
-                    alt="Imagem de login"
-                    className="w-[400px] h-[500px] object-cover"
-                />
             </div>
         </div>
     )
