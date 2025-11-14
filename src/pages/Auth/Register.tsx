@@ -18,7 +18,6 @@ export default function Register() {
             await a.register(name, email, password)
             navigate('/')
         } catch (err: any) {
-            // show error briefly (could be improved)
             alert(err?.message || 'Erro ao registrar')
         }
     }
