@@ -4,6 +4,7 @@ import Home from '../pages/Home'
 import Login from '../pages/Auth/Login'
 import Register from '../pages/Auth/Register'
 import Tarefa from '../pages/Tarefa'
+import MainTarefas from '../pages/Auth/MainTarefas'
 
 export default function AppRoutes() {
     return (
@@ -15,6 +16,7 @@ export default function AppRoutes() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="tarefa" element={<Tarefa />} />
+                <Route path="/maintarefas" element={<MainTarefas />} />
             </Routes>
         </BrowserRouter>
     )
