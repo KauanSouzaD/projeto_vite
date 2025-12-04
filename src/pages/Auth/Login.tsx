@@ -48,10 +48,10 @@ export default function Login() {
       </div>
       <div className="flex h-[400px] w-full border border-gray-300 rounded-2xl mt-5">
         <div className="md:w-[400px] flex-none w-[300px] h-[400px] flex flex-col justify-center p-8 text-white rounded-md">
-          <div className="mt-7 text-black text-2xl text-left font-bold pb-8">
+          <div className="text-center mt-7 text-black text-2xl  font-bold pb-8">
             Entrar
           </div>
-          <p className="text-left text-gray-500 mb-5">
+          <p className="text-center text-gray-500 mb-5">
             Entre com suas Credênciais
           </p>
           <form onSubmit={handleSubmit} className="w-full max-w-[280px]">
@@ -90,7 +90,7 @@ export default function Login() {
               Entrar
             </button>
 
-            <div className="justify-center text-black w-60 text-xs mt-8 mb-5 m-11">
+            <div className="text-center text-gray-500 text-sm mt-4 w-[337px]">
               Não tem uma conta?{" "}
               <a className="text-blue-400 text-1xl" href="/register">
                 Cadastre-se
