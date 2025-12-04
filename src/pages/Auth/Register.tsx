@@ -3,107 +3,144 @@ import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../contexts/auth'
 
 export default function Register() {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const auth = useContext(AuthContext)
-  const navigate = useNavigate()
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
-  if (!auth) throw new Error('AuthContext not found')
-  const a = auth
+    const auth = useContext(AuthContext)
+    const navigate = useNavigate()
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
+    const [errors, setErrors] = useState({
+        name: '',
+        email: '',
+        password: ''
+    })
 
-    if (!name.trim() || !email.trim() || !password.trim()) {
-      alert('Preencha todos os campos.')
-      return
+    if (!auth) throw new Error("AuthContext not found")
+    const a = auth
+
+    function validateForm() {
+        let valid = true
+        const newErrors = { name: '', email: '', password: '' }
+
+        if (name.trim().length < 3) {
+            newErrors.name = "O nome deve ter pelo menos 3 caracteres."
+            valid = false
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (!emailRegex.test(email)) {
+            newErrors.email = "Informe um e-mail válido."
+            valid = false
+        }
+
+        if (password.length < 6) {
+            newErrors.password = "A senha precisa ter no mínimo 6 caracteres."
+            valid = false
+        }
+
+        setErrors(newErrors)
+        return valid
     }
 
-    try {
-      await a.register(name, email, password)
-      navigate('/')
-    } catch (err: any) {
-      alert(err?.message || 'Erro ao registrar')
+    async function handleSubmit(e: React.FormEvent) {
+        e.preventDefault()
+        if (!validateForm()) return
+
+        try {
+            await a.register(name, email, password)
+            navigate('/login', { replace: true })
+        } catch (err: any) {
+            setErrors(prev => ({ ...prev, email: err?.message || "Erro ao registrar" }))
+        }
     }
-  }
 
-  return (
-    <div className="min-h-[80vh] flex items-center justify-center bg-transparent">
-      <div className="bg-white md:w-[400px] flex-none w-[200px] 
-      h-full flex flex-col justify-center p-8 text-white rounded-md border border-gray-300">
+    return (
+        <>
+            {/* LOGO */}
+            <div className=''>
+                <img
+                    className='w-18 mb-7 mx-auto rounded-2xl shadow-md'
+                    src="../public/Logo.png"
+                    alt="logo"
+                />
+            </div>
 
-        <h2 className="text-2xl font-semibold text-left text-gray-800 mb-6">
-          Criar Conta
-        </h2>
+            {/* CARD DE REGISTRO IGUAL AO LOGIN */}
+            <div className="flex h-[500px] w-full border border-gray-300 rounded-2xl mt-5">
+                <div className="md:w-[400px] flex-none w-[300px] h-[500px] flex flex-col justify-center p-8 text-white rounded-md">
 
-        <p className='text-[10px] font-semibold text-left text-gray-800 mb-6'>
-          Crie sua conta para começar a organizar suas tarefas
-        </p>
+                    {/* TÍTULO */}
+                    <div className="mt-7 text-black text-2xl text-left font-bold pb-3">
+                        Criar Conta
+                    </div>
+                    <p className='text-left text-gray-500 mb-5'>
+                        Preencha seus dados para continuar
+                    </p>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+                    <form onSubmit={handleSubmit} className="w-full max-w-[280px]">
 
-          <div>
-            <label className="block text-gray-700 text-left font-medium mb-1">
-              Nome:
-            </label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 
-                         bg-white text-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              placeholder="Seu nome"
-            />
-          </div>
+                        {/* NOME */}
+                        <label className="text-black block mb-3 text-left">
+                            Nome:
+                            <input
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                className={`w-[337px] px-3 py-1 border rounded-md bg-transparent text-black outline-none mt-1 
+                                    ${errors.name ? "border-red-400" : "border-gray-400"}`}
+                                placeholder="Digite seu nome"
+                            />
+                            {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
+                        </label>
 
-          <div>
-            <label className="block text-gray-700 text-left font-medium mb-1">
-              Email:
-            </label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 
-                         bg-white text-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              placeholder="seuemail@exemplo.com"
-            />
-          </div>
+                        {/* EMAIL */}
+                        <label className="text-black block mb-3 text-left">
+                            Email:
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className={`w-[337px] px-3 py-1 border rounded-md bg-transparent text-black outline-none mt-1 
+                                    ${errors.email ? "border-red-400" : "border-gray-400"}`}
+                                placeholder="Digite seu e-mail"
+                            />
+                            {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+                        </label>
 
-          <div>
-            <label className="block text-gray-700 text-left font-medium mb-1">
-              Senha:
-            </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 
-                         bg-white text-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              placeholder="••••••••"
-            />
-          </div>
+                        {/* SENHA */}
+                        <label className="text-black block mb-3 text-left">
+                            Senha:
+                            <input
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                className={`w-[337px] px-3 py-1 border rounded-md bg-transparent text-black outline-none mt-1
+                                    ${errors.password ? "border-red-400" : "border-gray-400"}`}
+                                placeholder="Digite sua senha"
+                            />
+                            {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
+                        </label>
 
-          <button
-            type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 
-                       text-white font-semibold py-2 rounded-lg 
-                       transition-all duration-200"
-          >
-            Registrar
-          </button>
+                        {/* BOTÃO */}
+                        <button
+                            type="submit"
+                            className="w-[337px] bg-blue-600 hover:bg-blue-700 py-2 rounded-md font-medium text-white mt-5
+                                       focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        >
+                            Criar Conta
+                        </button>
 
-        </form>
+                        {/* LINK */}
+                        <div className='justify-center text-black w-60 text-xs mt-8 mb-5 m-11'>
+                            Já tem uma conta?  
+                            <a className='text-blue-400 text-1xl ml-1' href="/login">
+                                Entrar
+                            </a>
+                        </div>
 
-        <p className="text-center text-gray-500 text-sm mt-4">
-          Já possui conta?{' '}
-          <a href="/" className="text-blue-600 hover:underline">
-            Faça login
-          </a>
-        </p>
-
-      </div>
-    </div>
-  )
+                    </form>
+                </div>
+            </div>
+        </>
+    )
 }
