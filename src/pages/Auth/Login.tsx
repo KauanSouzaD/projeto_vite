@@ -31,7 +31,7 @@ export default function Login() {
 
     try {
       await a.login(email, password);
-      navigate("/MainTarefas", { replace: true });
+      navigate("/app/maintarefas", { replace: true });
     } catch (err: any) {
       setError(err?.message || "Erro ao logar");
     }
@@ -54,7 +54,11 @@ export default function Login() {
           <p className="text-center text-gray-500 mb-5">
             Entre com suas Credênciais
           </p>
-          <form onSubmit={handleSubmit} className="w-full max-w-[280px]">
+          <form
+            onSubmit={handleSubmit}
+            className="w-full max-w-[280px]"
+            autoComplete="off"
+          >
             <div>
               <label className="text-black block mb-1 text-left">
                 Email:
@@ -64,6 +68,10 @@ export default function Login() {
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-[337px] px-3 py-1 border border-gray-400 text-black bg-transparent outline-0 focus:outline-none focus:ring-2 focus:ring-white mt-1 rounded-md"
                   placeholder="Digite seu e-mail"
+                  name="email"
+                  autoComplete="username"
+                  inputMode="email"
+                  autoCapitalize="none"
                 />
               </label>
             </div>
@@ -77,6 +85,9 @@ export default function Login() {
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-[337px] px-3 py-1 border border-gray-400 text-black bg-transparent outline-0 focus:outline-none focus:ring-2 focus:ring-white mt-1 rounded-md"
                   placeholder="Digite sua senha"
+                  name="password"
+                  autoComplete="current-password"
+                  autoCapitalize="none"
                 />
               </label>
             </div>

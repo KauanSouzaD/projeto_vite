@@ -42,7 +42,7 @@ export default function Register() {
           Crie sua conta para começar a organizar suas tarefas
         </p>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-5" autoComplete="off">
           <div>
             <label className="block text-gray-700 text-left font-medium mb-1">
               Nome:
@@ -54,6 +54,8 @@ export default function Register() {
               className="w-full border border-gray-300 rounded-lg px-3 py-2 
                          bg-white text-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none"
               placeholder="Seu nome"
+              name="name"
+              autoComplete="off"
             />
           </div>
 
@@ -68,6 +70,10 @@ export default function Register() {
               className="w-full border border-gray-300 rounded-lg px-3 py-2 
                          bg-white text-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none"
               placeholder="seuemail@exemplo.com"
+              name="email"
+              autoComplete="username"
+              inputMode="email"
+              autoCapitalize="none"
             />
           </div>
 
@@ -82,6 +88,9 @@ export default function Register() {
               className="w-full border border-gray-300 rounded-lg px-3 py-2 
                          bg-white text-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none"
               placeholder="••••••••"
+              name="password"
+              autoComplete="new-password"
+              autoCapitalize="none"
             />
           </div>
 

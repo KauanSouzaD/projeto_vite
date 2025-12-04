@@ -25,7 +25,7 @@ export default function MainTarefas() {
   } | null>(null);
   const [tarefas, setTarefas] = useState<Tarefa[]>([]);
 
-  // Carregar tarefas do localStorage
+ 
   useEffect(() => {
     const tarefasSalvas = localStorage.getItem("tarefas");
     if (tarefasSalvas) {
@@ -33,7 +33,6 @@ export default function MainTarefas() {
     }
   }, []);
 
-  // Salvar tarefas no localStorage
   useEffect(() => {
     localStorage.setItem("tarefas", JSON.stringify(tarefas));
   }, [tarefas]);

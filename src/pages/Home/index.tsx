@@ -41,7 +41,7 @@ export default function Home() {
           atividades em um só lugar.
         </p>
         <Link
-          to="/register"
+          to="/Register"
           className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 font-semibold text-lg transition shadow-lg"
         >
           Começar Agora
