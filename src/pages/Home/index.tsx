@@ -4,7 +4,6 @@ import "../../App.css";
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-      {/* Header */}
       <header className="bg-white shadow-sm border-b">
         <div className="px-6 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2">
@@ -29,8 +28,6 @@ export default function Home() {
           </div>
         </div>
       </header>
-
-      {/* Hero Section */}
       <section className="px-6 py-20 text-center">
         <h2 className="text-5xl font-bold text-gray-900 mb-6">
           Organize suas tarefas com TaskFlow
@@ -48,10 +45,9 @@ export default function Home() {
         </Link>
       </section>
 
-      {/* Features Cards */}
       <section className="px-6 py-16">
         <div className="grid md:grid-cols-3 gap-8">
-          {/* Card 1 */}
+
           <div className="bg-white rounded-2xl p-8 shadow-sm border text-center">
             <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <svg
@@ -75,8 +71,6 @@ export default function Home() {
               Crie e organize suas tarefas com apenas alguns cliques
             </p>
           </div>
-
-          {/* Card 2 */}
           <div className="bg-white rounded-2xl p-8 shadow-sm border text-center">
             <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <svg
@@ -101,7 +95,6 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Card 3 */}
           <div className="bg-white rounded-2xl p-8 shadow-sm border text-center">
             <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <svg
@@ -127,8 +120,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Resources Section */}
       <section className="px-6 py-16 text-center">
         <h2 className="text-3xl font-bold text-blue-600 mb-4">
           Recursos do TaskFlow

@@ -40,7 +40,7 @@ export default function MainTarefas() {
   if (!auth) throw new Error("AuthContext not found");
 
   function handleLogout() {
-    auth.logout();
+    auth?.logout();
     navigate("/", { replace: true });
   }
 
@@ -96,7 +96,6 @@ export default function MainTarefas() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-3">
@@ -133,9 +132,7 @@ export default function MainTarefas() {
         </div>
       </header>
 
-      {/* Conteúdo Principal */}
       <main className="max-w-4xl mx-auto px-6 py-8">
-        {/* Alerta */}
         {alerta && (
           <div
             className={`mb-6 p-4 rounded-lg flex items-center space-x-3 ${
@@ -157,7 +154,6 @@ export default function MainTarefas() {
           </div>
         )}
 
-        {/* Título e contador */}
         <div className="mb-6">
           <h2 className="text-3xl font-bold text-gray-900">Minhas Tarefas</h2>
           <p className="text-gray-600 mt-1">
@@ -165,7 +161,7 @@ export default function MainTarefas() {
           </p>
         </div>
 
-        {/* Card de Nova Tarefa */}
+
         <div className="bg-white rounded-lg shadow-sm border p-6 mb-6">
           <input
             type="text"
@@ -192,7 +188,7 @@ export default function MainTarefas() {
           </button>
         </div>
 
-        {/* Abas de Filtro */}
+
         <div className="bg-white rounded-lg shadow-sm border overflow-hidden mb-6">
           <div className="flex">
             <button
@@ -228,7 +224,7 @@ export default function MainTarefas() {
           </div>
         </div>
 
-        {/* Lista de Tarefas */}
+
         {tarefasFiltradas.length === 0 ? (
           <div className="text-center py-12 text-gray-400">
             <p className="text-lg">Nenhuma tarefa ainda</p>
