@@ -1,48 +1,48 @@
-import { useState, useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { AuthContext } from '../../contexts/auth'
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../contexts/auth";
 
 export default function Register() {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const auth = useContext(AuthContext)
-  const navigate = useNavigate()
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  if (!auth) throw new Error('AuthContext not found')
-  const a = auth
+  if (!auth) throw new Error("AuthContext not found");
+  const a = auth;
 
   async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
+    e.preventDefault();
 
     if (!name.trim() || !email.trim() || !password.trim()) {
-      alert('Preencha todos os campos.')
-      return
+      alert("Preencha todos os campos.");
+      return;
     }
 
     try {
-      await a.register(name, email, password)
-      navigate('/')
+      await a.register(name, email, password);
+      navigate("/");
     } catch (err: any) {
-      alert(err?.message || 'Erro ao registrar')
+      alert(err?.message || "Erro ao registrar");
     }
   }
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center bg-transparent">
-      <div className="bg-white md:w-[400px] flex-none w-[200px] 
-      h-full flex flex-col justify-center p-8 text-white rounded-md border border-gray-300">
-
-        <h2 className="text-2xl font-semibold text-left text-gray-800 mb-6">
+      <div
+        className="bg-white md:w-[400px] flex-none w-[200px] 
+      h-full flex flex-col justify-center p-8 text-white rounded-md border border-gray-300"
+      >
+        <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">
           Criar Conta
         </h2>
 
-        <p className='text-[10px] font-semibold text-left text-gray-800 mb-6'>
+        <p className="text-sm text-left text-gray-600 mb-6">
           Crie sua conta para começar a organizar suas tarefas
         </p>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
-
+        <form onSubmit={handleSubmit} className="space-y-5" autoComplete="off">
           <div>
             <label className="block text-gray-700 text-left font-medium mb-1">
               Nome:
@@ -54,6 +54,8 @@ export default function Register() {
               className="w-full border border-gray-300 rounded-lg px-3 py-2 
                          bg-white text-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none"
               placeholder="Seu nome"
+              name="name"
+              autoComplete="off"
             />
           </div>
 
@@ -68,6 +70,10 @@ export default function Register() {
               className="w-full border border-gray-300 rounded-lg px-3 py-2 
                          bg-white text-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none"
               placeholder="seuemail@exemplo.com"
+              name="email"
+              autoComplete="username"
+              inputMode="email"
+              autoCapitalize="none"
             />
           </div>
 
@@ -82,6 +88,9 @@ export default function Register() {
               className="w-full border border-gray-300 rounded-lg px-3 py-2 
                          bg-white text-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none"
               placeholder="••••••••"
+              name="password"
+              autoComplete="new-password"
+              autoCapitalize="none"
             />
           </div>
 
@@ -93,17 +102,15 @@ export default function Register() {
           >
             Registrar
           </button>
-
         </form>
 
         <p className="text-center text-gray-500 text-sm mt-4">
-          Já possui conta?{' '}
-          <a href="/" className="text-blue-600 hover:underline">
+          Já possui conta?{" "}
+          <a href="/login" className="text-blue-600 hover:underline">
             Faça login
           </a>
         </p>
-
       </div>
     </div>
-  )
+  );
 }
